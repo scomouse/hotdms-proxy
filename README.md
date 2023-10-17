@@ -11,7 +11,15 @@
 
 ## 开发与部署环境
 - MySQL 8.0
-- Java 8+ 
+- Java 8+
+
+## 免费代理源
+| 站点名称                 |       页面地址       | 说明     |    
+| :----------------- | :-----: | -------------------------- |
+| 方法SEO顾问        | https://proxy.seofangfa.com/  | 测试、代理少 |
+| hidemy        | https://hidemy.io/cn/proxy-list/  | 测试、高匿、国外较多 |
+| 站大爷        | https://www.zdaye.com/free/1/  | 测试、国内多|
+
 
 ## 功能截图
 
@@ -19,7 +27,7 @@
    
 ![img](http://124.222.161.158:7090/proxy/login.png) 
 
-2. 代理数据页
+3. 代理数据页
    
 ![img](http://124.222.161.158:7090/proxy/proxy_list.png) 
 
