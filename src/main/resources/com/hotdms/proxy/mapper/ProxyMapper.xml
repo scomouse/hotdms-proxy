@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotdms.proxy.mapper.ProxyMapper" >
+  <resultMap id="proxyResultMap" type="com.hotdms.proxy.bean.Proxy" >
+    <id column="id" property="id" jdbcType="BIGINT" />  
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="INTEGER" /> 
+   	<result column="address" property="address" jdbcType="VARCHAR" />
+   	<result column="speed" property="speed" jdbcType="INTEGER" /> 
+   	<result column="ratio" property="ratio" jdbcType="INTEGER" /> 
+    <result column="checkTime" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" /> 
+  </resultMap> 
+  <sql id="column_list" >
+    id, ip, port, address, speed, ratio, checkTime, createTime, status, source, flag 
+  </sql>  
+  <select id="findById" resultMap="proxyResultMap">
+    select <include refid="column_list" /> from hotdms_proxy where id = #{id}
+  </select>
+  <select id="findByIpAndPort" resultMap="proxyResultMap">
+    select <include refid="column_list" /> from hotdms_proxy where ip = #{ip} and port = #{port}
+  </select>
+  <insert id="insert" parameterType="com.hotdms.proxy.bean.Proxy" >
+    insert into hotdms_proxy (<include refid="column_list" />)
+    values (#{id}, #{ip}, #{port}, #{address}, #{speed}, #{ratio}, #{checkTime}, #{createTime}, #{status}, #{source}, #{flag}) 
+  </insert>
+  <update id="updateById" parameterType="com.hotdms.proxy.bean.Proxy" >
+    update hotdms_proxy set
+    	address = #{address},
+      	speed = #{speed},
+      	ratio = #{ratio},
+      	checkTime = #{checkTime},
+      	status = #{status},
+      	flag = #{flag} where id = #{id}
+  </update>
+  <update id="deleteById" >
+    update hotdms_proxy set flag=1  where id = #{id}
+  </update>
+  
+  <delete id="deleteByFlag">
+    delete from hotdms_proxy where flag = 1 and checkTime <![CDATA[<=]]> #{checkTime}
+  </delete> 
+  
+  <sql id="page_where">
+		<trim prefix="where" prefixOverrides="and | or ">
+			<if test="ip != null and ip != ''">and ip = #{ip} </if>
+			<if test="type != null and type == 'SOCK'">and port <![CDATA[<>]]> 80 </if>
+			<if test="type != null and type == 'HTTP'">and port = 80 </if>
+		    <if test="speed !=null and speed != 0">and speed  <![CDATA[>=]]> #{speed}</if> 
+			<if test="address != null and address != ''">and address like CONCAT('%',#{address},'%') </if>
+		    <if test="flag !=null">and flag=#{flag}</if> 
+			<if test="status != null and status != ''">and status = #{status} </if> 
+			<if test="source != null and source != ''">and source = #{source} </if> 
+			<if test="startCheckTime != null and endCheckTime != null">and ( checkTime <![CDATA[>=]]> #{startCheckTime} and checkTime <![CDATA[<=]]> #{endCheckTime})</if>  
+		</trim>
+  </sql>
+  
+  <select id="page" resultMap="proxyResultMap" parameterType="com.hotdms.proxy.bean.ProxySearch">
+		select <include refid="column_list" /> from hotdms_proxy <include refid="page_where" />  order by checkTime desc , speed desc limit ${(pageNo-1)*pageSize}, #{pageSize}
+  </select>
+  
+  <select id="fetchCheck" resultMap="proxyResultMap">
+		select <include refid="column_list" /> from hotdms_proxy where flag=0 and status='0' and checkTime <![CDATA[<=]]> #{checkTime} order by checkTime asc limit 0, 100
+  </select>
+  
+  <select id="fetchLast" resultMap="proxyResultMap">
+		select <include refid="column_list" /> from hotdms_proxy where flag=0 and status='0' and checkTime <![CDATA[>=]]> #{checkTime} order by checkTime desc limit 0, 20
+  </select>
+  
+  <select id="count" resultType="int" parameterType="com.hotdms.proxy.bean.ProxySearch">
+		select count(id) from hotdms_proxy <include refid="page_where" />
+  </select>
+</mapper>

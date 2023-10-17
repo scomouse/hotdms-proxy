@@ -1,0 +1,26 @@
+{
+    "meetingtypeData":[
+      { "name": "定时会议", "value": 0 },
+      { "name": "周期会议", "value": 1 },
+      { "name": "长期会议", "value": 2 }     
+    ],
+    "meetingmoddata":[
+        { "name": "高级会议", "value": 0 },      
+        { "name": "讨论会议", "value": 1 },
+        { "name": "演讲会议", "value": 2 }
+      ],
+      "meetingleveldata":[
+        { "name": "省级", "value": 0 },
+        { "name": "市级", "value": 1 },
+        { "name": "区、县级", "value": 2 }
+      ],
+      "meetingtemplatedata":[
+        { "name": "默认", "value": 0 },
+        { "name": "其他", "value": 1 }
+      ],
+      "moreresources":[
+        { "name": "直播", "value": 0 },
+        { "name": "合成服务器", "value": 1 },
+        { "name": "录播", "value": 2 } 
+      ]  
+}

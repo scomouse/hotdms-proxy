@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotdms.proxy.mapper.TaskLogMapper" >
+  <resultMap id="taskLogResultMap" type="com.hotdms.proxy.bean.TaskLog" >
+    <id column="id" property="id" jdbcType="BIGINT" /> 
+    <result column="taskid" property="taskid" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />  
+    <result column="status" property="status" jdbcType="VARCHAR" /> 
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="column_list" >
+    id, taskid, time, status, message
+  </sql>   
+  <insert id="insert" parameterType="com.hotdms.proxy.bean.TaskLog">
+    insert into hotdms_task_log ( taskid, time, status, message)
+    values ( #{taskid}, #{time}, #{status}, #{message})
+  </insert> 
+  
+  <select id="findById" resultMap="taskLogResultMap" parameterType="java.lang.Long" >
+    select <include refid="column_list" /> from hotdms_task_log where id = #{id}
+  </select> 
+  
+  <sql id="page_where">
+		<trim prefix="where" prefixOverrides="and | or ">
+			<if test="taskid != null">and taskid = #{taskid}</if>
+			<if test="status != null and status != ''">and status = #{status}</if>
+		</trim>
+  </sql> 
+  <select id="page" resultMap="taskLogResultMap" parameterType="com.hotdms.proxy.bean.TaskLogSearch">
+		select <include refid="column_list" /> from hotdms_task_log <include refid="page_where" /> order by time desc limit ${(pageNo-1)*pageSize}, #{pageSize}
+  </select>
+	
+  <select id="count" resultType="int" parameterType="com.hotdms.proxy.bean.TaskLogSearch">
+		select count(id) from hotdms_task_log <include refid="page_where" />
+  </select> 
+  
+</mapper>

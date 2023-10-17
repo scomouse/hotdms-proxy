@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotdms.proxy.mapper.CrawlerMapper" >
+  <resultMap id="crawlerResultMap" type="com.hotdms.proxy.bean.Crawler" >
+    <id column="id" property="id" jdbcType="BIGINT" />  
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" /> 
+   	<result column="xpath" property="xpath" jdbcType="VARCHAR" />
+   	<result column="timeInterval" property="timeInterval" jdbcType="INTEGER" /> 
+   	<result column="keymap" property="keymap" jdbcType="VARCHAR" />
+    <result column="handlerClass" property="handlerClass" jdbcType="VARCHAR" />
+    <result column="taskGroup" property="taskGroup" jdbcType="VARCHAR" /> 
+   	<result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lastCrawlTime" property="lastCrawlTime" jdbcType="TIMESTAMP" /> 
+  </resultMap> 
+  <sql id="column_list" >
+    id, name, url, xpath, timeInterval, keymap, handlerClass, taskGroup, status, updateTime, lastCrawlTime 
+  </sql>  
+  <select id="findById" resultMap="crawlerResultMap">
+    select <include refid="column_list" /> from hotdms_crawler where id = #{id}
+  </select>
+  <select id="findByName" resultMap="crawlerResultMap">
+    select <include refid="column_list" /> from hotdms_crawler where name = #{name}
+  </select>
+  <select id="findAll" resultMap="crawlerResultMap">
+    select <include refid="column_list" /> from hotdms_crawler order by updateTime desc
+  </select>
+  <select id="findByTaskGroup" resultMap="crawlerResultMap">
+    select <include refid="column_list" /> from hotdms_crawler where taskGroup = #{taskGroup} order by updateTime desc
+  </select>
+  <insert id="insert" parameterType="com.hotdms.proxy.bean.Crawler" >
+    insert into hotdms_crawler (<include refid="column_list" />)
+    values (#{id}, #{name}, #{url}, #{xpath}, #{timeInterval}, #{keymap}, #{handlerClass}, #{taskGroup}, #{status}, #{updateTime}, #{lastCrawlTime}) 
+  </insert>
+  <update id="updateById" parameterType="com.hotdms.proxy.bean.Crawler" >
+    update hotdms_crawler set
+    	name = #{name},
+      	url = #{url},
+      	xpath = #{xpath},
+      	timeInterval = #{timeInterval},
+      	keymap = #{keymap},
+      	handlerClass = #{handlerClass},
+      	taskGroup = #{taskGroup},
+      	status = #{status},
+      	updateTime = #{updateTime} where id = #{id}
+  </update>
+  <update id="updateForCrawlTime" >
+    update hotdms_crawler set lastCrawlTime=#{lastCrawlTime} where id = #{id}
+  </update>
+  <delete id="deleteById">
+    delete from hotdms_crawler where id = #{id}
+  </delete> 
+  
+  <sql id="page_where">
+		<trim prefix="where" prefixOverrides="and | or "> 
+			<if test="name != null and name != ''">and name like CONCAT('%',#{name},'%') </if> 
+			<if test="status != null and status != ''">and status = #{status} </if> 
+			<if test="taskGroup != null and taskGroup != ''">and taskGroup = #{taskGroup} </if>
+		</trim>
+  </sql>
+  
+  <select id="page" resultMap="crawlerResultMap" parameterType="com.hotdms.proxy.bean.CrawlerSearch">
+		select <include refid="column_list" /> from hotdms_crawler <include refid="page_where" />  order by updateTime desc limit ${(pageNo-1)*pageSize}, #{pageSize}
+  </select> 
+  
+  <select id="count" resultType="int" parameterType="com.hotdms.proxy.bean.CrawlerSearch">
+		select count(id) from hotdms_crawler <include refid="page_where" />
+  </select>
+</mapper>

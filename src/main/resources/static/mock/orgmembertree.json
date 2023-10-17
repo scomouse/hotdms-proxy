@@ -1,0 +1,139 @@
+{"treeData":[
+    {
+        "title": "华平南昌",
+        "value":"hpnc-0-0",
+        "key": "hpnc",
+        "isLeaf":false,
+        "children": [
+        {
+            "title": "研发部",
+            "value": "hpnc-yfb",
+            "key": "yfb",
+            "isLeaf":false,
+            "children": [
+                {
+                    "title": "yf0001",
+                    "value":"hpnc-yfb-yf0001",
+                    "key": "yf0001",
+                    "isLeaf":true
+                },
+                {
+                    "title": "yf0002",
+                    "value":"hpnc-yfb-yf0002",
+                    "key": "yf0002",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "yf0003",
+                    "value":"hpnc-yfb-yf0003",
+                    "key": "yf0003",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "yf0004",
+                    "value":"hpnc-yfb-yf0004",
+                    "key": "yf0004",
+                    "isLeaf":true                   
+                }                                               
+            ]
+        },
+        {
+            "title": "测试部",
+            "value": "hpnc-csb",
+            "key": "csb",
+            "isLeaf":false,
+            "children": [
+                {
+                    "title": "cs0001",
+                    "value":"hpnc-csb-cs0001",
+                    "key": "cs0001",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "cs0002",
+                    "value":"hpnc-csb-cs0002",
+                    "key": "cs0002",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "cs0003",
+                    "value":"hpnc-csb-cs0003",
+                    "key": "cs0003",
+                    "isLeaf":true                   
+                },
+                {
+                    "title": "cs0004",
+                    "value":"hpnc-csb-cs0004",
+                    "key": "cs0004",
+                    "isLeaf":true                   
+                } 
+            ]
+        },
+        {
+            "title": "财务部",
+            "value": "hpnc-cwb",
+            "key": "cwb",
+            "isLeaf":false,
+            "children": [
+                {
+                    "title": "cw0001",
+                    "value":"hpnc-cwb-cw0001",
+                    "key": "cw0001",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "cw0002",
+                    "value":"hpnc-cwb-cw0002",
+                    "key": "cw0002",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "cw0003",
+                    "value":"hpnc-cwb-cw0003",
+                    "key": "cw0003",
+                    "isLeaf":true                   
+                },
+                {
+                    "title": "cw0004",
+                    "value":"hpnc-cwb-cw0004",
+                    "key": "cw0004",
+                    "isLeaf":true                    
+                } 
+            ]
+        },
+        {
+            "title": "行政部",
+            "value": "hpnc-xzb",
+            "key": "xzb",
+            "isLeaf":false,
+            "children": [
+                {
+                    "title": "xz0001",
+                    "value":"hpnc-xzb-xz0001",
+                    "key": "xz0001",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "xz0002",
+                    "value":"hpnc-xzb-xz0002",
+                    "key": "xz0002",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "xz0003",
+                    "value":"hpnc-xzb-xz0003",
+                    "key": "xz0003",
+                    "isLeaf":true                    
+                },
+                {
+                    "title": "xz0004",
+                    "value":"hpnc-xzb-xz0004",
+                    "key": "xz0004",
+                    "isLeaf":true                   
+                } 
+            ]
+        }
+      ]
+    }
+  ]
+}
