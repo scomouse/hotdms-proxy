@@ -1,2 +1,37 @@
-# hotdms-proxy
-crawl proxy from internet website, and manage as pool by yourself
+# HOTDMS-PROXY
+基于网络爬虫的代理IP池管理工具，主旨为提供私有部署、向应用开放的代理服务，满足本地化部署应用代理需求，类似小说、数据等爬虫场景应用。
+
+## 主要功能与规划
+- 方便易用、易于管理的可视化控制台
+- 爬虫配置、提供可用免费代理的站点爬虫
+- 通路检测配置、提供代理可用性检测方案，过滤大量不可用的无效的代理
+- 计划任务配置、支持多爬虫分组多线程模式代理获取
+- 统一接入服务、实现代理的代理服务（规划中）
+- 代理运行监控（规划中）
+
+## 开发与部署环境
+- MySQL 8.0
+- Java 8+ 
+
+## 功能截图
+
+1. 控制台登录页
+   
+![img](http://124.222.161.158:7090/proxy/login.png) 
+
+2. 代理数据页
+   
+![img](http://124.222.161.158:7090/proxy/proxy_list.png) 
+
+3. 爬虫配置页
+   
+![img](http://124.222.161.158:7090/proxy/crawler_list.png) 
+
+4. 检测配置页
+   
+![img](http://124.222.161.158:7090/proxy/netway_list.png) 
+
+5. 计划任务页
+   
+![img](http://124.222.161.158:7090/proxy/task_list.png) 
+
